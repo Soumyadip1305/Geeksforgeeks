@@ -35,11 +35,19 @@ class Solution
     }
 
 
-    private static BigInteger factorial(int n) {
+    public static BigInteger factorial(int n) {
+        BigInteger[] dp = new BigInteger[n + 1];
+        Arrays.fill(dp, BigInteger.valueOf(-1));
+        return factorialUtil(n, dp);
+    }
+
+    private static BigInteger factorialUtil(int n, BigInteger[] dp) {
         if (n == 0) {
             return BigInteger.ONE;
         }
-        BigInteger result=BigInteger.valueOf(n);
-        return result.multiply(factorial(n-1));
+        if (!dp[n].equals(BigInteger.valueOf(-1))){
+            return dp[n];
+        }
+           return dp[n] = BigInteger.valueOf(n).multiply(factorialUtil(n - 1, dp));
     }
 }
