@@ -39,30 +39,35 @@ class Main{
 class Solution
 {
     //Function to find a continuous sub-array which adds up to a given number.
-    static ArrayList<Integer> subarraySum(int[] arr, int n, int s) 
+    static ArrayList<Integer> subarraySum(int[] A, int n, int S) 
     {
-           int start = 0, sum = 0;
-        ArrayList<Integer> list = new ArrayList<>();
-        if (s==0){
-            list.add(-1);
-            return list;
+        ArrayList<Integer> result = new ArrayList<>();
+        
+         if (S==0) {
+            result.add(-1);
+            return result;
+        }
+    int left = 0;
+    int right = 0;
+    int currentSum = 0;
+
+    while (right < A.length) {
+        currentSum += A[right];
+
+        while (currentSum > S) {
+            currentSum -= A[left];
+            left++;
         }
 
-        for(int i=0; i<n; i++) {
-            sum += arr[i];
-
-            while (sum > s) {
-                sum -= arr[start];
-                start++;
-            }
-
-            if (sum == s) {
-                list.add(start + 1);
-                list.add(i + 1);
-                return list;
-            }
+        if (currentSum == S) {
+            result.add(left + 1);
+            result.add(right + 1);
+            return result;
         }
-        list.add(-1);
-        return list;
+
+        right++;
     }
+    result.add(-1);
+    return result;
+}
 }
