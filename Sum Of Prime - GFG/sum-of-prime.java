@@ -27,7 +27,7 @@ class Solution {
     static int[] getPrimes(int N) {
             int []arr=new int[2];
         Arrays.fill(arr,-1);
-        for (int i = 1; i <=N ; i++) {
+        for (int i = 1; i <=Math.sqrt(N) ; i++) {
              if (is_prime(i)&&is_prime(N-i)){
                     arr[0]=i;
                     arr[1]=N-i;
