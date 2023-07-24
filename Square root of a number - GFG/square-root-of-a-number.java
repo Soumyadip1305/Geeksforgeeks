@@ -28,25 +28,16 @@ class Solution
 {
      long floorSqrt(long x)
 	 {
-		  if (x == 0 || x == 1) {
-            return x;
-        }
-        long low = 1;
-        long high = x;
-        long result = 0;
-        while (low <= high) {
-            long mid = low + (high - low) / 2;
-            long temp = mid * mid;
-            if (temp == x) {
-                result = mid;
-                break;
-            } else if (temp < x) {
-                result = mid;
-                low = mid + 1;
-            } else {
-                high = mid - 1;
+		long low=1;
+        long high=x;
+        while (low<=high){
+            long mid=low+(high-low)/2;
+			long n=mid*mid;
+            if (mid*mid<=x){
+                low=mid+1;
+            }else {
+                high=mid-1;
             }
-        }
-        return result;
+        }return high;
 	 }
 }
