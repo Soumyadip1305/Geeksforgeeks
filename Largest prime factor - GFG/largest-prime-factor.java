@@ -26,7 +26,7 @@ class GFG
 
 class Solution{
     static long largestPrimeFactor(int N) {
-        long n = N;
+       long n = N;
         ArrayList<Long> ans = new ArrayList<>();
         long i;
         for (i = 2; i * i <= n; ++i) {
