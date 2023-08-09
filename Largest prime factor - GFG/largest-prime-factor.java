@@ -26,15 +26,16 @@ class GFG
 
 class Solution{
     static long largestPrimeFactor(int N) {
-           long n=N;
-        ArrayList <Long>ans=new ArrayList<>();
-         long i;
-        for( i=2;i*i<=n;++i){
-            while(n%i==0){
+        long n = N;
+        ArrayList<Long> ans = new ArrayList<>();
+        long i;
+        for (i = 2; i * i <= n; ++i) {
+            while (n % i == 0) {
                 ans.add(i);
-                n/=i;
+                n /= i;
             }
-        }if (n>1)ans.add(n);
+        }
+        if (n > 1) ans.add(n);
         return Collections.max(ans);
     }
 }
