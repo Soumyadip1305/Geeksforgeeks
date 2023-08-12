@@ -29,12 +29,12 @@ class FindMinCost
 
 /*Complete the function given below*/
 class Solution {
-    public int maxArea(int M[][], int n, int m) {
-       int[] currRow = new int[m];
+   public static int maxArea(int[][] mat, int n, int m) {
+        int[] currRow = new int[m];
         int maxAns = 0;
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
-                if (M[i][j] == 1) {
+                if (mat[i][j] == 1) {
                     currRow[j] += 1;
                 } else {
                     currRow[j] = 0;
@@ -45,43 +45,42 @@ class Solution {
         return maxAns;
     }
 
-    public static int largestRectangleArea(int[] hist) {
-        int[] left = new int[hist.length];
-        Stack<Integer> st1 = new Stack<>();
-        int[] right = new int[hist.length];
-        Stack<Integer> st2 = new Stack<>();
-
-        for (int i = 0; i < hist.length; i++) {
-            while (!st1.isEmpty() && hist[i] <= hist[st1.peek()]) {
-                st1.pop();
+    public static int largestRectangleArea(int[] height) {
+        int n=height.length;
+        Stack<Integer> stack = new Stack<>();
+        int[] leftSmaller = new int[n];
+        int[] rightSmaller = new int[n];
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && height[i] <= height[stack.peek()]) {
+                stack.pop();
             }
-            if (st1.isEmpty()) {
-                left[i] = -1;
+            if (stack.isEmpty()) {
+                leftSmaller[i] = -1;
             } else {
-                left[i] = st1.peek();
+                leftSmaller[i] = stack.peek();
             }
-            st1.push(i);
+            stack.push(i);
         }
-
-        for (int i = hist.length - 1; i >= 0; i--) {
-            while (!st2.isEmpty() && hist[i] <= hist[st2.peek()]) {
-                st2.pop();
+        /* Clear stack to reuse  */
+        stack.clear();
+        for (int i = n - 1; i >= 0; i--) {
+            while (!stack.isEmpty() && height[i] <= height[stack.peek()]) {
+                stack.pop();
             }
-            if (st2.isEmpty()) {
-                right[i] = hist.length;
+
+            if (stack.isEmpty()) {
+                rightSmaller[i] =n;
             } else {
-                right[i] = st2.peek();
+                rightSmaller[i] = stack.peek();
             }
-            st2.push(i);
+
+            stack.push(i);
+        }
+        int maxi = 0;
+        for (int i = 0; i < n; i++) {
+            maxi = Math.max(maxi, (rightSmaller[i] - leftSmaller[i] - 1) * height[i]);
         }
 
-        int max_area = Integer.MIN_VALUE;
-        for (int i = 0; i < hist.length; i++) {
-            int area = (right[i] - left[i] - 1) * hist[i];
-            max_area = Math.max(max_area, area);
-        }
-
-        return max_area;
-
+        return maxi;
     }
 }
