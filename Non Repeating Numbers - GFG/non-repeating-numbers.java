@@ -39,21 +39,18 @@ class Solution
 {
     public int[] singleNumber(int[] nums)
     {
-         int x = 0;
-        for (int num : nums) {
-            x ^= num;
-        }
-        int rmb = x & -x;
-        int f = 0;
-        int s = 0;
-
-        for (int i : nums) {
-            if ((i & rmb) != 0) {
-                f ^= i;
+          ArrayList<Integer>list=new ArrayList<>();
+        int i = 0;
+        Arrays.sort(nums);
+        while (i < nums.length - 1) {
+            if (nums[i] != nums[i + 1]) {
+                list.add(nums[i] );
+                i++;
             } else {
-                s ^= i;
+                i += 2;
             }
         }
-        return new int[]{Math.min(f, s), Math.max(f, s)};
+        if (list.size() < 2) list.add(nums[i] );
+        return new int[]{list.get(0),list.get(1)};
     }
 }
