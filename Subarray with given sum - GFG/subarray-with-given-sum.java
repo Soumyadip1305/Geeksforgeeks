@@ -39,7 +39,7 @@ class Main{
 class Solution
 {
     //Function to find a continuous sub-array which adds up to a given number.
-    static ArrayList<Integer> subarraySum(int[] A, int n, int S) 
+   static ArrayList<Integer> subarraySum(int[] A, int n, int S) 
     {
         ArrayList<Integer> result = new ArrayList<>();
         
