@@ -24,30 +24,14 @@ class GFG {
 
 class Solution {
     int isPalindrome(String S) {
-         return pl(S)?1:0;
+            char[] arr = S.toCharArray();
+        return is_Palindrome(arr, 0) ? 1 : 0;
+        // return is_Palindrome(S, 0, S.length() - 1) ? 1 : 0;
     }
-    public static boolean pl(String s) {
-        s = s.toLowerCase();
-        int left = 0;
-        int right = s.length() - 1;
 
-        while (left < right) {
-            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) {
-                left++;
-            }
-            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) {
-                right--;
-            }
-
-            if (s.charAt(left) != s.charAt(right)) {
-                return false;
-            }
-
-            left++;
-            right--;
-        }
-
-        return true;
+    static boolean is_Palindrome(char[] s, int i) {
+        if (i > s.length / 2) return true;
+        if (s[i] != s[s.length - i - 1]) return false;
+        return is_Palindrome(s, i + 1);
     }
 }
-
